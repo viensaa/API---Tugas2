@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 //menambakan Konfigurasi EF
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("SamuraiConnection")).EnableSensitiveDataLogging());
@@ -21,6 +22,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //inject DAL
 builder.Services.AddScoped<IStudent, StudentDAL>();
+builder.Services.AddScoped<ICourse, CourseDAL>();
 
 
 var app = builder.Build();
