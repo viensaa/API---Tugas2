@@ -18,6 +18,7 @@ namespace Tugas2BE.Data
         {
 
         }
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -26,5 +27,7 @@ namespace Tugas2BE.Data
         {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Tugas2");
         }
+
     }
 }
+

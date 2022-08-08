@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tugas2BE", "Tugas2BE\Tugas2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tugas2BE.Domain", "Tugas2BE.Domain\Tugas2BE.Domain.csproj", "{5668C201-4378-471D-8E1B-70CB5E167710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tugas2BE.Data", "Tugas2BE.Data\Tugas2BE.Data.csproj", "{71A2C604-3B88-4E5D-9770-657EE3687866}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tugas2BE.Data", "Tugas2BE.Data\Tugas2BE.Data.csproj", "{620F7C46-0849-4C6C-99C0-58B787F34ACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{5668C201-4378-471D-8E1B-70CB5E167710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5668C201-4378-471D-8E1B-70CB5E167710}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5668C201-4378-471D-8E1B-70CB5E167710}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71A2C604-3B88-4E5D-9770-657EE3687866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71A2C604-3B88-4E5D-9770-657EE3687866}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71A2C604-3B88-4E5D-9770-657EE3687866}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71A2C604-3B88-4E5D-9770-657EE3687866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620F7C46-0849-4C6C-99C0-58B787F34ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620F7C46-0849-4C6C-99C0-58B787F34ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620F7C46-0849-4C6C-99C0-58B787F34ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620F7C46-0849-4C6C-99C0-58B787F34ACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
