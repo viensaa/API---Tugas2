@@ -16,12 +16,7 @@ namespace Tugas2BE.Profiles
             CreateMap<Enrollment, CourseDTO>();
 
             
-            CreateMap< CourseDTO, Enrollment>();
-            CreateMap< Course, Student>();
-            CreateMap< Course, StudentWithCourseDTO>();
-            CreateMap< CourseDTO, StudentWithCourseDTO>();
-            CreateMap< Enrollment, Course>();
-            CreateMap<Course,Enrollment >();
+            
 
         }
     }

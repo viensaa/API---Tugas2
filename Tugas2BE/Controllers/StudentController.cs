@@ -31,9 +31,9 @@ namespace Tugas2BE.Controllers
 
         //student with course
         [HttpGet("WithCourse")]
-        public async Task<IEnumerable<StudentWithCourseDTO>> StudentCourse()
+        public async Task<IEnumerable<StudentWithCourseDTO>> StudentCourse(int page)
         {
-            var results = await _studentDAL.StudentWithCourse();
+            var results = await _studentDAL.StudentWithCourse(page);
             //var readData = _mapper.Map<IEnumerable<StudentWithCourseDTO>>(results);
            // tanpa mapper
              List<StudentWithCourseDTO> readData = new List<StudentWithCourseDTO>();

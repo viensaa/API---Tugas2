@@ -80,10 +80,15 @@ namespace Tugas2BE.Data.DAL
             }
         }
 
-        public async Task<IEnumerable<Student>> StudentWithCourse()
+        public async Task<IEnumerable<Student>> StudentWithCourse(int page)
         {
-            
-            var results = await _context.Students.Include(s => s.Enrollments).ThenInclude(e => e.Course).ToListAsync();
+            var pageResults = 10f;
+            var pageCount = Math.Ceiling(_context.Students.Count() / pageResults);
+
+            var results = await _context.Students.Include(s => s.Enrollments).ThenInclude(e => e.Course)
+                .Skip((page - 1) * (int)pageResults)
+                .Take((int)pageResults)
+                .ToListAsync();
             return results;
         }
 
