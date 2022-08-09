@@ -25,6 +25,12 @@ namespace Tugas2BE.Data.DAL
             return results;
         }
 
+        public async Task<IEnumerable<Course>> CourseByStudent()
+        {
+            var results = await _context.Courses.Include(c => c.Enrollments).ThenInclude(e => e.Student).ToListAsync();
+            return results;
+        }
+
         public async Task DeleteById(int id)
         {
             var findData = await _context.Courses.SingleOrDefaultAsync(c=> c.CourseID == id);

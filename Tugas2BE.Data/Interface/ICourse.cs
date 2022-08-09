@@ -10,6 +10,7 @@ namespace Tugas2BE.Data.Interface
     public interface ICourse : ICrud<Course>
     {        
         Task<IEnumerable<Course>> ByTitle(string title);
+        Task<IEnumerable<Course>> CourseByStudent();
 
     }
 }
