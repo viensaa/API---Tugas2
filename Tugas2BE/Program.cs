@@ -23,6 +23,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //inject DAL
 builder.Services.AddScoped<IStudent, StudentDAL>();
 builder.Services.AddScoped<ICourse, CourseDAL>();
+builder.Services.AddScoped<IEnrollment,EnrollmentDAL>();
 
 
 var app = builder.Build();
