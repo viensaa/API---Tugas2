@@ -80,6 +80,13 @@ namespace Tugas2BE.Data.DAL
             }
         }
 
+        public async Task<IEnumerable<Student>> StudentWithCourse()
+        {
+            
+            var results = await _context.Students.Include(s => s.Enrollments).ThenInclude(e => e.Course).ToListAsync();
+            return results;
+        }
+
         public async Task<Student> Update(Student obj)
         {
             try

@@ -28,6 +28,40 @@ namespace Tugas2BE.Controllers
             var ReadData = _mapper.Map<IEnumerable<StudentDTO>>(results);
             return ReadData;
         }
+
+        //student with course
+        [HttpGet("WithCourse")]
+        public async Task<IEnumerable<StudentWithCourseDTO>> StudentCourse()
+        {
+            var results = await _studentDAL.StudentWithCourse();
+            //var readData = _mapper.Map<IEnumerable<StudentWithCourseDTO>>(results);
+           // tanpa mapper
+             List<StudentWithCourseDTO> readData = new List<StudentWithCourseDTO>();
+            foreach (var result in results)
+            {
+                List<CourseDTO> courseDTOs = new List<CourseDTO>();
+                foreach (var enrolment in result.Enrollments)
+                {
+                    courseDTOs.Add(new CourseDTO
+                    {
+                        CourseID = enrolment.CourseID,
+                        Title = enrolment.Course.Title,
+                        Credits = enrolment.Course.Credits
+                    });
+                }                
+                readData.Add(new StudentWithCourseDTO
+                {
+                    ID = result.ID,
+                    FirstMidName = result.FirstMidName,
+                    LastName = result.LastName,
+                    Enrollments = courseDTOs
+                    
+                });
+                
+            }
+            return readData;
+        }
+
         //byFname
         [HttpGet("FName/{Fname}")]
         public async Task<IEnumerable<StudentDTO>>FName(string Fname)

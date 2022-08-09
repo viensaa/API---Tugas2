@@ -11,6 +11,7 @@ namespace Tugas2BE.Data.Interface
     {
         Task<IEnumerable<Student>> ByFirstName(string Fname);
         Task<IEnumerable<Student>> ByLastName(string Lname);
+        Task<IEnumerable<Student>> StudentWithCourse();
 
     }
 }
