@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tugas2BE.Domain
+﻿namespace Tugas2BE.Models
 {
     public class Student
     {
@@ -15,5 +9,5 @@ namespace Tugas2BE.Domain
 
         public ICollection<Enrollment> Enrollments { get; set; }
     }
-
 }
+

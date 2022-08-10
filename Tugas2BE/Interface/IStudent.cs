@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tugas2BE.Domain;
+﻿using Tugas2BE.Models;
 
-namespace Tugas2BE.Data.Interface
+namespace Tugas2BE.Interface
 {
     public interface IStudent : ICrud<Student>
     {

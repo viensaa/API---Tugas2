@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Tugas2BE.Domain;
+
 using Tugas2BE.DTO;
+using Tugas2BE.Models;
 
 namespace Tugas2BE.Profiles
 {

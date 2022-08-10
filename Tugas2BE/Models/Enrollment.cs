@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tugas2BE.Domain
+﻿namespace Tugas2BE.Models
 {
     public enum Grade
     {
         A, B, C, D, F
     }
-
     public class Enrollment
     {
         public int EnrollmentID { get; set; }
@@ -20,5 +13,4 @@ namespace Tugas2BE.Domain
         public Course Course { get; set; }
         public Student Student { get; set; }
     }
-
 }

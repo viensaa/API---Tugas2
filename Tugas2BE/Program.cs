@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Tugas2BE.Data;
-using Tugas2BE.Data.DAL;
-using Tugas2BE.Data.Interface;
+using Tugas2BE.DAL;
+using Tugas2BE.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//menambakan Konfigurasi EF
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("SamuraiConnection")).EnableSensitiveDataLogging());
+//menambah ef core
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("SamuraiConnection")));
+
 
 //menambahkan configurasi auto mapper 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
