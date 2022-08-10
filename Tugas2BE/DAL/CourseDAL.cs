@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tugas2BE.Data.Interface;
-using Tugas2BE.Domain;
+using Tugas2BE.Interface;
+using Tugas2BE.Models;
 
-namespace Tugas2BE.Data.DAL
+namespace Tugas2BE.DAL
 {
     public class CourseDAL : ICourse
     {
-        private readonly DataContext _context;
+        private readonly AppDbContext _context;
 
-        public CourseDAL(DataContext dataContext)
+        public CourseDAL(AppDbContext dataContext)
         {
             _context = dataContext;
         }
@@ -33,7 +28,7 @@ namespace Tugas2BE.Data.DAL
 
         public async Task DeleteById(int id)
         {
-            var findData = await _context.Courses.SingleOrDefaultAsync(c=> c.CourseID == id);
+            var findData = await _context.Courses.SingleOrDefaultAsync(c => c.CourseID == id);
             if (findData == null) throw new Exception($"Data dengan ID {id} Tidak Ditemukan");
 
             _context.Remove(findData);
@@ -78,7 +73,7 @@ namespace Tugas2BE.Data.DAL
 
                 findData.Title = obj.Title;
                 findData.Credits = obj.Credits;
-                
+
                 await _context.SaveChangesAsync();
                 return obj;
             }

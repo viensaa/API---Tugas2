@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tugas2BE.Data.Interface;
-using Tugas2BE.Domain;
+using Tugas2BE.Interface;
+using Tugas2BE.Models;
 
-namespace Tugas2BE.Data.DAL
+namespace Tugas2BE.DAL
 {
     public class EnrollmentDAL : IEnrollment
     {
-        private readonly DataContext _context;
+        private readonly AppDbContext _context;
 
-        public EnrollmentDAL(DataContext dataContext)
+        public EnrollmentDAL(AppDbContext dataContext)
         {
             _context = dataContext;
         }

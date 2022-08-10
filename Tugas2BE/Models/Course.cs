@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tugas2BE.Domain
+namespace Tugas2BE.Models
 {
     public class Course
     {
@@ -16,5 +11,4 @@ namespace Tugas2BE.Domain
 
         public ICollection<Enrollment> Enrollments { get; set; }
     }
-
 }

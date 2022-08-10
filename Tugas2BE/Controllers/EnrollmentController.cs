@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Tugas2BE.Data.Interface;
-using Tugas2BE.Domain;
+
 using Tugas2BE.DTO;
+using Tugas2BE.Interface;
+using Tugas2BE.Models;
 
 namespace Tugas2BE.Controllers
 {

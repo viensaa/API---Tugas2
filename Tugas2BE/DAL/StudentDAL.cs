@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tugas2BE.Data.Interface;
-using Tugas2BE.Domain;
+using Tugas2BE.Interface;
+using Tugas2BE.Models;
 
-namespace Tugas2BE.Data.DAL
+namespace Tugas2BE.DAL
 {
     public class StudentDAL : IStudent
     {
-        private readonly DataContext _context;
+        private readonly AppDbContext _context;
 
-        public StudentDAL(DataContext dataContext) 
+        public StudentDAL(AppDbContext dataContext)
         {
             _context = dataContext;
         }
@@ -39,7 +34,7 @@ namespace Tugas2BE.Data.DAL
             try
             {
                 var findData = await _context.Students.SingleOrDefaultAsync(s => s.ID == id);
-                if(findData ==null) throw new Exception($"Data dengan ID {id} Tidak Ditemukan");
+                if (findData == null) throw new Exception($"Data dengan ID {id} Tidak Ditemukan");
 
                 _context.Remove(findData);
                 await _context.SaveChangesAsync();
