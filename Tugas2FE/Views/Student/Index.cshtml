@@ -20,11 +20,12 @@
             <th>
                 Id
             </th>
-            <th>
-                LastName
-            </th>
+            
             <th>
                 FirstName
+            </th>
+            <th>
+                LastName
             </th>
             <th>
                 Action
@@ -38,11 +39,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.id)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lastName)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.firstMidName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
                 </td>
                 <td>
                     <a class="btn btn-warning btn-sm" asp-action="Update"

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Text;
 using Tugas2FE.Interfaces;
 using Tugas2FE.ViewModels;
 
@@ -13,9 +14,18 @@ namespace Tugas2FE.Services
             throw new NotImplementedException();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync($"https://localhost:8001/api/Course?id={id}"))
+                {
+                    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    {
+                        throw new Exception("Gagal Menghapus data");
+                    }
+                }
+            }
         }
 
         public  async Task<IEnumerable<Course>> GetAll()
@@ -32,19 +42,60 @@ namespace Tugas2FE.Services
             return courses;
         }
 
-        public Task<Course> GetById(int id)
+        public async Task<Course> GetById(int id)
         {
-            throw new NotImplementedException();
+            Course course = new Course();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:8001/api/Course/{id}"))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        course = JsonConvert.DeserializeObject<Course>(apiResponse);
+                    }
+                }
+            }
+            return course;
         }
 
-        public Task<Course> Insert(Course obj)
+        public async Task<Course> Insert(Course obj)
         {
-            throw new NotImplementedException();
+            Course course = new Course();
+            using(var httpClient = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(obj),
+                    Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync("https://localhost:8001/api/Course", content))
+                {
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        course = JsonConvert.DeserializeObject<Course>(apiResponse);
+                    }
+                }
+            }
+            return course;
         }
 
-        public Task<Course> Update(Course obj)
+        public async Task<Course> Update(Course obj)
         {
-            throw new NotImplementedException();
+            Course course = await GetById(obj.courseID);
+            if (course == null)
+                throw new Exception($"Id {obj.courseID} Tidak Ditemukan");
+            StringContent content = new StringContent(JsonConvert.SerializeObject(obj)
+               , Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync("https://localhost:8001/api/Course", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    course = JsonConvert.DeserializeObject<Course>(apiResponse);
+                }
+            }
+            return course;
         }
+        
     }
 }
