@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 //injek dependensices
 builder.Services.AddScoped<IStudent, StudentServices>();
+builder.Services.AddScoped<ICourse, CourseServices>();
 
 var app = builder.Build();
 
