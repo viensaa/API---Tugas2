@@ -61,6 +61,37 @@ namespace Tugas2BE.Controllers
                 
             }
             return readData;
+
+        } //student with course by id
+        [HttpGet("WithCoursebyid/{id}")]
+        public async Task<StudentWithCourseDTO> StudentCourseById(int id)
+        {
+            var results = await _studentDAL.StudentCourseById(id);
+            //var readData = _mapper.Map<IEnumerable<StudentWithCourseDTO>>(results);
+           // tanpa mapper
+             StudentWithCourseDTO readData =  new StudentWithCourseDTO();
+            
+                List<CourseDTO> courseDTOs = new List<CourseDTO>();
+                foreach (var enrolment in results.Enrollments)
+                {
+                    courseDTOs.Add(new CourseDTO
+                    {
+                        CourseID = enrolment.CourseID,
+                        Title = enrolment.Course.Title,
+                        Credits = enrolment.Course.Credits
+                    });
+                }                
+                readData = new StudentWithCourseDTO
+                {
+                    ID = results.ID,
+                    FirstMidName = results.FirstMidName,
+                    LastName = results.LastName,
+                    Enrollments = courseDTOs
+                    
+                };
+                
+            
+            return readData;
         }
 
         //byFname

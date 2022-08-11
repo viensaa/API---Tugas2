@@ -52,6 +52,23 @@ namespace Tugas2FE.Services
             return student;
         }
 
+        public async Task<StudentWithCourse> StudentCourseById(int id)
+        {
+            StudentWithCourse studentWithCourse = new StudentWithCourse();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:8001/api/Student/WithCoursebyid/{id}"))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        studentWithCourse = JsonConvert.DeserializeObject<StudentWithCourse>(apiResponse);
+                    }
+                }
+            }
+            return studentWithCourse;
+        }
+
         public async Task<Student> Insert(Student obj)
         {
             Student student = new Student();
@@ -71,6 +88,8 @@ namespace Tugas2FE.Services
             }
             return student;
         }
+
+        
 
         public async Task<Student> Update(Student obj)
         {

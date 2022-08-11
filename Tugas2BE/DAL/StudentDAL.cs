@@ -75,6 +75,14 @@ namespace Tugas2BE.DAL
             }
         }
 
+        public async Task<Student> StudentCourseById(int id)
+        {
+            var result = await _context.Students.Include(s => s.Enrollments).ThenInclude(e => e.Course)
+               .SingleOrDefaultAsync(s => s.ID == id);
+               
+            return result;
+        }
+
         public async Task<IEnumerable<Student>> StudentWithCourse(int page)
         {
             var pageResults = 10f;

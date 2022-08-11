@@ -9,6 +9,7 @@ namespace Tugas2FE.Interfaces
         Task<Student> Insert(Student obj);
         Task<Student> Update(Student obj);
         Task Delete(int id);
+        Task<StudentWithCourse> StudentCourseById(int id);
 
     }
 }

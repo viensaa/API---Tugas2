@@ -89,5 +89,11 @@ namespace Tugas2FE.Controllers
             }
         }
 
+        public async Task<IActionResult> StudentCourseById(int id)
+        {
+            var result = await _studentDAL.StudentCourseById(id);
+            return View(result);
+        }
+
     }
 }
