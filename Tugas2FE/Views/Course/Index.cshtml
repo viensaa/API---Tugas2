@@ -25,7 +25,9 @@
             <th>
                 Credits
             </th>
-            <th></th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -41,10 +43,13 @@
                 @Html.DisplayFor(modelItem => item.credits)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+                    <a class="btn btn-warning btn-sm" asp-action="Update"
+                   asp-route-id="@item.courseID">update</a> &nbsp; &nbsp;
+                    <a class="btn btn-primary btn-sm" asp-action="StudentCourseById"
+                   asp-route-id="@item.courseID">details</a> &nbsp;
+                    <a class="btn btn-danger btn-sm" asp-action="Delete"
+                   asp-route-id="@item.courseID">Delete</a> &nbsp;
+                </td>
         </tr>
 }
     </tbody>
