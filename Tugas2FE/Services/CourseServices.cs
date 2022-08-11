@@ -9,9 +9,21 @@ namespace Tugas2FE.Services
     {
 
 
-        public Task<CourseWithStudent> CourseWithStudent(int id)
+        public async Task<CourseWithStudent> CourseWithStudent(int id)
         {
-            throw new NotImplementedException();
+            CourseWithStudent courseWithStudent = new CourseWithStudent();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:8001/api/Course/WithStudentByid/{id}"))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        courseWithStudent = JsonConvert.DeserializeObject<CourseWithStudent>(apiResponse);
+                    }
+                }
+            }
+            return courseWithStudent;
         }
 
         public async Task Delete(int id)
