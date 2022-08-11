@@ -7,8 +7,6 @@ namespace Tugas2FE.Services
 {
     public class CourseServices : ICourse
     {
-
-
         public async Task<CourseWithStudent> CourseWithStudent(int id)
         {
             CourseWithStudent courseWithStudent = new CourseWithStudent();
