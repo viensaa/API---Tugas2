@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Tugas2FE.ViewModels.Student>
+
+@{
+    ViewData["Title"] = "Student";
+    Layout = "_newLayout";
+}
+
+<h1>Daftar Students</h1>
+<div>
+    @if (ViewData["pesan"] != null)
+    {
+        @Html.Raw(ViewData["pesan"])
+    }
+</div>
+<br />
+
+<table class="table table-striped" id="example">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstMidName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
