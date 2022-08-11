@@ -7,9 +7,18 @@ namespace Tugas2FE.Services
 {
     public class StudentServices : IStudent
     {
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync($"https://localhost:8001/api/Student?id={id}"))
+                {
+                    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    {
+                        throw new Exception("Gagal Menghapus data");
+                    }
+                }
+            }
         }
 
         public async Task<IEnumerable<Student>> GetAll()
