@@ -21,8 +21,7 @@ namespace Tugas2FE.Controllers
             return View(model);
         }
 
-        //insert data
-        
+        //insert data        
         public IActionResult Create()
         {
 
@@ -43,5 +42,29 @@ namespace Tugas2FE.Controllers
                 return View();
             }
         }
+
+        //update
+        public async Task<IActionResult>Update(int id)
+        {
+            var model = await _studentDAL.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>Update(Student student)
+        {
+            try
+            {
+                var result = await _studentDAL.Update(student);
+                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Mengubah Data Student dengan ID {result.id}</div>";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return View();
+            }
+        }
+
     }
 }

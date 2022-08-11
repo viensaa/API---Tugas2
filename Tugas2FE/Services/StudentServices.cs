@@ -26,6 +26,23 @@ namespace Tugas2FE.Services
             return students;
         }
 
+        public async Task<Student> GetById(int id)
+        {
+            Student student = new Student();
+            using(var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:8001/api/Student/{id}"))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        student = JsonConvert.DeserializeObject<Student>(apiResponse);
+                    }
+                }
+            }
+            return student;
+        }
+
         public async Task<Student> Insert(Student obj)
         {
             Student student = new Student();
@@ -46,9 +63,23 @@ namespace Tugas2FE.Services
             return student;
         }
 
-        public Task<Student> Update(Student obj)
+        public async Task<Student> Update(Student obj)
         {
-            throw new NotImplementedException();
+            Student student = await GetById(obj.id);
+            if(student == null)
+                throw new Exception($"Id {obj.id} Tidak Ditemukan");
+            StringContent content = new StringContent(JsonConvert.SerializeObject(obj)
+               , Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync("https://localhost:8001/api/Student", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    student = JsonConvert.DeserializeObject<Student>(apiResponse);
+                }
+            }
+            return student;
         }
+
     }
 }
