@@ -7,6 +7,7 @@
         public string FirstMidName { get; set; }
         public string Title { get; set; }
         public int Credits { get; set; }
+        public string Grade { get; set; }
         public DateTime EnrollmentDate { get; set; }
     }
 }

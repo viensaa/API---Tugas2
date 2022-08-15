@@ -20,5 +20,30 @@ namespace Tugas2FE.Controllers
             models = await _enrollmentDAL.GetAll();
             return View(models);
         }
+
+        //insert
+        //insert data        
+        public IActionResult Create()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(Enrollment enrollment)
+        {
+            try
+            {
+                var result = await _enrollmentDAL.Insert(enrollment);
+                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Melakukan enrollment  Dengan Id {result.EnrollmentID}</div>";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Error: {ex.Message}</div>";
+                return View();
+            }
+        }
+
     }
 }
