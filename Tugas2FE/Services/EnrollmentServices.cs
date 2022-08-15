@@ -7,9 +7,18 @@ namespace Tugas2FE.Services
 {
     public class EnrollmentServices : IEnrollment
     {
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync($"https://localhost:8001/api/Enrollment?id={id}"))
+                {
+                    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    {
+                        throw new Exception("Gagal Menghapus data");
+                    }
+                }
+            }
         }
 
         public async Task<IEnumerable<EnrollmentDetail>> GetAll()
@@ -65,7 +74,25 @@ namespace Tugas2FE.Services
 
         public async Task<Enrollment> Update(Enrollment obj)
         {
-            Enrollment = await GetById(obj.EnrollmentID);
+            Enrollment enrollment = await GetById(obj.EnrollmentID);
+            if(enrollment == null)
+            {
+                throw new Exception($"Id {obj.EnrollmentID} Tidak Ditemukan");
+            }
+            StringContent content = new StringContent(JsonConvert.SerializeObject(obj)
+              , Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync("https://localhost:8001/api/Enrollment", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    enrollment = JsonConvert.DeserializeObject<Enrollment>(apiResponse);
+                }
+            }
+            return enrollment;
         }
+
+
+
     }
 }
