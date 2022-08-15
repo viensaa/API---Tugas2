@@ -1,4 +1,5 @@
-﻿@model Tugas2FE.ViewModels.Enrollment
+﻿@using Tugas2FE.ViewModels
+@model Tugas2FE.ViewModels.Enrollment
 
 @{
     ViewData["Title"] = "Create";
@@ -15,18 +16,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group">
-                <label asp-for="CourseID" class="control-label"></label>
+                <label asp-for="CourseID" class="form-label"></label>
                 <input asp-for="CourseID" class="form-control" />
                 <span asp-validation-for="CourseID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StudentID" class="control-label"></label>
+                <label asp-for="StudentID" class="form-label"></label>
                 <input asp-for="StudentID" class="form-control" />
                 <span asp-validation-for="StudentID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Grade" class="control-label"></label>
-                <input asp-for="Grade" class="form-control" />
+                <label asp-for="Grade" class="form-label"></label>
+                <select asp-for="Grade" asp-items="@Html.GetEnumSelectList<Grade>()" class="form-control" ></select>
                 <span asp-validation-for="Grade" class="text-danger"></span>
             </div>
             <div class="form-group">
