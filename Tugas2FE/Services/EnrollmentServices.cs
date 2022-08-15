@@ -1,4 +1,5 @@
-﻿using Tugas2FE.Interfaces;
+﻿using Newtonsoft.Json;
+using Tugas2FE.Interfaces;
 using Tugas2FE.ViewModels;
 
 namespace Tugas2FE.Services
@@ -10,12 +11,22 @@ namespace Tugas2FE.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Enrollment>> GetAll()
+        public async Task<IEnumerable<EnrollmentDetail>> GetAll()
         {
-            throw new NotImplementedException();
+            List<EnrollmentDetail> enrollmentDetails = new List<EnrollmentDetail>();
+            using (var httpClient = new HttpClient())
+            {
+                using(var response = await httpClient.GetAsync("https://localhost:8001/api/Enrollment"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    enrollmentDetails = JsonConvert.DeserializeObject<List<EnrollmentDetail>>(apiResponse);
+                }
+            }
+            return enrollmentDetails;
+
         }
 
-        public Task<Enrollment> GetById(int id)
+        public Task<EnrollmentDetail> GetById(int id)
         {
             throw new NotImplementedException();
         }
