@@ -75,10 +75,8 @@ namespace Tugas2FE.Services
         public async Task<Enrollment> Update(Enrollment obj)
         {
             Enrollment enrollment = await GetById(obj.EnrollmentID);
-            if(enrollment == null)
-            {
-                throw new Exception($"Id {obj.EnrollmentID} Tidak Ditemukan");
-            }
+            if(enrollment == null)            
+                throw new Exception($"Id {obj.EnrollmentID} Tidak Ditemukan");            
             StringContent content = new StringContent(JsonConvert.SerializeObject(obj)
               , Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())

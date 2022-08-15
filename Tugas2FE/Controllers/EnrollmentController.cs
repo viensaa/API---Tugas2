@@ -58,7 +58,8 @@ namespace Tugas2FE.Controllers
             try
             {
                 var result = await _enrollmentDAL.Update(enrollment);
-                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Mengubah Data Course dengan ID {result.EnrollmentID}</div>";
+                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Mengubah Data Course dengan ID {result.EnrollmentID}</div>";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
