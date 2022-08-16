@@ -53,7 +53,8 @@ namespace Tugas2FE.Controllers
             try
             {
                 var result = await _accountDAL.Authenticate(model);
-                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Login, Token {result.Token}</div>";
+                var token = "bearer " + result.Token;
+                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button>  {token}</div>";
                 return RedirectToAction("Index", "Student");
             }
             catch (Exception ex)
