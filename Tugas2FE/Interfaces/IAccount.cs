@@ -5,7 +5,7 @@ namespace Tugas2FE.Interfaces
     public interface IAccount
     {
         Task<Account> Insert(Account obj);
-        Task<SLogin> Authenticate(string username, string password);
+        Task<SLogin> Authenticate(Account obj);
 
     }
 }

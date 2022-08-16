@@ -7,9 +7,24 @@ namespace Tugas2FE.Services
 {
     public class AccountServices : IAccount
     {
-        public Task<SLogin> Authenticate(string username, string password)
+        public async Task<SLogin> Authenticate(Account obj)
         {
-            throw new NotImplementedException();
+            SLogin sLogin = new SLogin();
+            Account account = new Account();
+            using (var httpClient = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(obj),
+                   Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync($"https://localhost:8001/api/User/Login", content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        sLogin = JsonConvert.DeserializeObject<SLogin>(apiResponse);
+                    }
+                }
+            }
+            return sLogin;
         }
 
         public async Task<Account> Insert(Account obj)
