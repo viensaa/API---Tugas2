@@ -26,6 +26,11 @@ namespace Tugas2FE.Services
                         string apiResponse = await response.Content.ReadAsStringAsync();
                         account = JsonConvert.DeserializeObject<Account>(apiResponse);
                     }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        throw new Exception($"Error : {apiResponse}");
+                    }
                 }
             }
             return account;

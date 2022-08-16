@@ -29,6 +29,13 @@
 <!--===============================================================================================-->
 </head>
 <body>	
+	<div>
+    @if (ViewData["pesan"] != null)
+    {
+        @Html.Raw(ViewData["pesan"])
+    }
+</div>
+<br />
 	<div class="limiter" >
 		<div class="container-login100"  >
 			<div class="wrap-login100"  >

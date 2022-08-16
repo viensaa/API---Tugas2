@@ -21,6 +21,7 @@ namespace Tugas2FE.Controllers
         
         public IActionResult Register()
         {
+            ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             return View();
         }
 
