@@ -17,7 +17,7 @@ namespace Tugas2FE.Services
                    Encoding.UTF8, "application/json");
                 using (var response = await httpClient.PostAsync($"https://localhost:8001/api/User/Login", content))
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
                         sLogin = JsonConvert.DeserializeObject<SLogin>(apiResponse);

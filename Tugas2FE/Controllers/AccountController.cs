@@ -41,5 +41,27 @@ namespace Tugas2FE.Controllers
             }
         }
 
+        public IActionResult Login()
+        {
+            ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(Account model)
+        {
+            try
+            {
+                var result = await _accountDAL.Authenticate(model);
+                TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Login, Token {result.Token}</div>";
+                return RedirectToAction("Index", "Student");
+            }
+            catch (Exception ex)
+            {
+
+                return View();
+            }
+        }
+
     }
 }
