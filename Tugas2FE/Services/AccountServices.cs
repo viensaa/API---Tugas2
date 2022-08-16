@@ -12,7 +12,7 @@ namespace Tugas2FE.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Account> Register(Account obj)
+        public async Task<Account> Insert(Account obj)
         {
             Account account = new Account();
             using (var httpClient = new HttpClient())

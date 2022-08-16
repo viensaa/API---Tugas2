@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IStudent, StudentServices>();
 builder.Services.AddScoped<ICourse, CourseServices>();
 builder.Services.AddScoped<IEnrollment, EnrollmentServices>();
+builder.Services.AddScoped<IAccount, AccountServices>();
 
 var app = builder.Build();
 
