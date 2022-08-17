@@ -21,11 +21,12 @@ namespace Tugas2FE.Services
             }
         }
 
-        public async Task<IEnumerable<Student>> GetAll()
+        public async Task<IEnumerable<Student>> GetAll(string token)
         {
             List<Student> students = new List<Student>();
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.GetAsync("https://localhost:8001/api/Student"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

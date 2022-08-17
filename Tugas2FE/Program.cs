@@ -6,6 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//membuat session
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "Mysession.frontend";
+    options.IdleTimeout = TimeSpan.FromMinutes(2);
+    options.Cookie.IsEssential = true;
+});
+
 //injek dependensices
 builder.Services.AddScoped<IStudent, StudentServices>();
 builder.Services.AddScoped<ICourse, CourseServices>();
@@ -28,7 +36,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

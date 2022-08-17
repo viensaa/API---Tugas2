@@ -20,10 +20,17 @@ namespace Tugas2FE.Controllers
         //getdALL
         public async Task<IActionResult> Index()
         {
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
 
             IEnumerable<EnrollmentDetail> models;
-            models = await _enrollmentDAL.GetAll();
+            models = await _enrollmentDAL.GetAll(myToken);
             return View(models);
         }
 
@@ -31,19 +38,30 @@ namespace Tugas2FE.Controllers
         //insert data        
         public async Task<IActionResult> Create()
         {
-            ViewBag.Course =new SelectList(await _courseDAL.GetAll(), "courseID", "title");
-            ViewBag.Student =new SelectList(await _studentDAL.GetAll(), "id", "lastName");
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            ViewBag.Course =new SelectList(await _courseDAL.GetAll(myToken), "courseID", "title");
+            ViewBag.Student =new SelectList(await _studentDAL.GetAll(myToken), "id", "lastName");
             return View();
         }
         
         [HttpPost]
         public async Task<ActionResult> Create(Enrollment enrollment)
         {
-            
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
             try
             {
-                ViewBag.Course = new SelectList(await _courseDAL.GetAll(), "courseID", "title");
-                ViewBag.Student = new SelectList(await _studentDAL.GetAll(), "id", "lastName");
+                ViewBag.Course = new SelectList(await _courseDAL.GetAll(myToken), "courseID", "title");
+                ViewBag.Student = new SelectList(await _studentDAL.GetAll(myToken), "id", "lastName");
                 var result = await _enrollmentDAL.Insert(enrollment);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Melakukan enrollment  Dengan Id {result.EnrollmentID}</div>";
                 return RedirectToAction("Index");

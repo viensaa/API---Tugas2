@@ -6,7 +6,7 @@ namespace Tugas2FE.Interfaces
 
     public interface IEnrollment
     {
-        Task<IEnumerable<EnrollmentDetail>> GetAll();
+        Task<IEnumerable<EnrollmentDetail>> GetAll(string token);
         Task<Enrollment> GetById(int id);
         Task<Enrollment> Insert(Enrollment obj);
         Task<Enrollment> Update(Enrollment obj);

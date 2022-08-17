@@ -15,9 +15,16 @@ namespace Tugas2FE.Controllers
 
         public async Task<IActionResult> Index()
         {
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             IEnumerable<Course> models;
-            models = await _courseDAL.GetAll();
+            models = await _courseDAL.GetAll(myToken);
             return View(models);
         }
 
