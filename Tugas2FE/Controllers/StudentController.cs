@@ -39,7 +39,14 @@ namespace Tugas2FE.Controllers
         {
             try
             {
-                var result = await _studentDAL.Insert(student);
+                //mendapat TOKEN
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                var result = await _studentDAL.Insert(student,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil menambahkan data Student Dengan Id {result.id}</div>";
                 return RedirectToAction("Index");
             }
@@ -53,7 +60,14 @@ namespace Tugas2FE.Controllers
         //update
         public async Task<IActionResult>Update(int id)
         {
-            var model = await _studentDAL.GetById(id);
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model = await _studentDAL.GetById(id,myToken);
             return View(model);
         }
 
@@ -62,7 +76,14 @@ namespace Tugas2FE.Controllers
         {
             try
             {
-                var result = await _studentDAL.Update(student);
+                //mendapat TOKEN
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                var result = await _studentDAL.Update(student,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Mengubah Data Student dengan ID {result.id}</div>";
                 return RedirectToAction("Index");
             }
@@ -76,7 +97,14 @@ namespace Tugas2FE.Controllers
         //delete
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _studentDAL.GetById(id);
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model = await _studentDAL.GetById(id,myToken);
             return View(model);
         }
 
@@ -86,7 +114,14 @@ namespace Tugas2FE.Controllers
         {
             try
             {
-                await _studentDAL.Delete(id);
+                //mendapat TOKEN
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                await _studentDAL.Delete(id,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Menghapus Data</div>";
                 return RedirectToAction("Index");
             }
@@ -98,7 +133,14 @@ namespace Tugas2FE.Controllers
 
         public async Task<IActionResult> StudentCourseById(int id)
         {
-            var result = await _studentDAL.StudentCourseById(id);
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var result = await _studentDAL.StudentCourseById(id,myToken);
             return View(result);
         }
 
