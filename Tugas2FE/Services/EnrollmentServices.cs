@@ -7,10 +7,11 @@ namespace Tugas2FE.Services
 {
     public class EnrollmentServices : IEnrollment
     {
-        public async Task Delete(int id)
+        public async Task Delete(int id,string token)
         {
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.DeleteAsync($"https://localhost:8001/api/Enrollment?id={id}"))
                 {
                     if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -38,11 +39,12 @@ namespace Tugas2FE.Services
 
         }
 
-        public async Task<Enrollment> GetById(int id)
+        public async Task<Enrollment> GetById(int id,string token)
         {
             Enrollment enrollment = new Enrollment();
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.GetAsync($"https://localhost:8001/api/Enrollment/{id}"))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -55,11 +57,12 @@ namespace Tugas2FE.Services
             return enrollment;
         }
 
-        public async Task<Enrollment> Insert(Enrollment obj)
+        public async Task<Enrollment> Insert(Enrollment obj,string token)
         {
             Enrollment enrollment = new Enrollment();
             using(var httpClient  = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 StringContent content = new StringContent(JsonConvert.SerializeObject(obj),
                     Encoding.UTF8, "application/json");
                 using (var response = await httpClient.PostAsync("https://localhost:8001/api/Enrollment", content))
@@ -74,15 +77,16 @@ namespace Tugas2FE.Services
             return enrollment;
         }
 
-        public async Task<Enrollment> Update(Enrollment obj)
+        public async Task<Enrollment> Update(Enrollment obj,string token)
         {
-            Enrollment enrollment = await GetById(obj.EnrollmentID);
+            Enrollment enrollment = await GetById(obj.EnrollmentID,token);
             if(enrollment == null)            
                 throw new Exception($"Id {obj.EnrollmentID} Tidak Ditemukan");            
             StringContent content = new StringContent(JsonConvert.SerializeObject(obj)
               , Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.PutAsync("https://localhost:8001/api/Enrollment", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

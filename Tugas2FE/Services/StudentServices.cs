@@ -5,8 +5,10 @@ using Tugas2FE.ViewModels;
 
 namespace Tugas2FE.Services
 {
+
     public class StudentServices : IStudent
     {
+        
         public async Task Delete(int id)
         {
             using (var httpClient = new HttpClient())

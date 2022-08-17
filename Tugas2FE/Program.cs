@@ -14,6 +14,9 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+
+
+
 //injek dependensices
 builder.Services.AddScoped<IStudent, StudentServices>();
 builder.Services.AddScoped<ICourse, CourseServices>();

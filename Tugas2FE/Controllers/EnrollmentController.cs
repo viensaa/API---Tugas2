@@ -38,6 +38,7 @@ namespace Tugas2FE.Controllers
         //insert data        
         public async Task<IActionResult> Create()
         {
+
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
             {
@@ -62,7 +63,7 @@ namespace Tugas2FE.Controllers
             {
                 ViewBag.Course = new SelectList(await _courseDAL.GetAll(myToken), "courseID", "title");
                 ViewBag.Student = new SelectList(await _studentDAL.GetAll(myToken), "id", "lastName");
-                var result = await _enrollmentDAL.Insert(enrollment);
+                var result = await _enrollmentDAL.Insert(enrollment,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Melakukan enrollment  Dengan Id {result.EnrollmentID}</div>";
                 return RedirectToAction("Index");
             }
@@ -76,7 +77,13 @@ namespace Tugas2FE.Controllers
         //update
         public async Task<IActionResult> Update(int id)
         {
-            var model = await _enrollmentDAL.GetById(id);
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model = await _enrollmentDAL.GetById(id,myToken);
             return View(model);
         }
 
@@ -85,7 +92,13 @@ namespace Tugas2FE.Controllers
         {
             try
             {
-                var result = await _enrollmentDAL.Update(enrollment);
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                var result = await _enrollmentDAL.Update(enrollment,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'>" +
                     $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Mengubah Data Course dengan ID {result.EnrollmentID}</div>";
                 return RedirectToAction("Index");
@@ -100,7 +113,13 @@ namespace Tugas2FE.Controllers
         //delete
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _enrollmentDAL.GetById(id);
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model = await _enrollmentDAL.GetById(id,myToken);
             return View(model);
         }
 
@@ -110,7 +129,13 @@ namespace Tugas2FE.Controllers
         {
             try
             {
-                await _enrollmentDAL.Delete(id);
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                await _enrollmentDAL.Delete(id,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Menghapus Data</div>";
                 return RedirectToAction("Index");
             }

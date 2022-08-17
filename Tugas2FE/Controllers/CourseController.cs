@@ -38,9 +38,17 @@ namespace Tugas2FE.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Course course)
         {
+            
             try
             {
-                var result = await _courseDAL.Insert(course);
+                //mendapat TOKEN
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                var result = await _courseDAL.Insert(course,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil menambahkan data Course Dengan Id {result.courseID}</div>";
                 return RedirectToAction("Index");
             }
@@ -55,16 +63,31 @@ namespace Tugas2FE.Controllers
         //update
         public async Task<IActionResult> Update(int id)
         {
-            var model = await _courseDAL.GetById(id);
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model = await _courseDAL.GetById(id,myToken);
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(Course course)
         {
+
             try
             {
-                var result = await _courseDAL.Update(course);
+                //mendapat TOKEN
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                var result = await _courseDAL.Update(course,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'>" +
                     $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Mengubah Data Course dengan ID {result.courseID}</div>";
                 return RedirectToAction("Index");
@@ -79,7 +102,14 @@ namespace Tugas2FE.Controllers
         //delete
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _courseDAL.GetById(id);
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model = await _courseDAL.GetById(id,myToken);
             return View(model);
         }
 
@@ -89,7 +119,14 @@ namespace Tugas2FE.Controllers
         {
             try
             {
-                await _courseDAL.Delete(id);
+                //mendapat TOKEN
+                string myToken = string.Empty;
+                if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+                {
+                    myToken = HttpContext.Session.GetString("token");
+
+                }
+                await _courseDAL.Delete(id,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Menghapus Data</div>";
                 return RedirectToAction("Index");
             }
@@ -102,7 +139,14 @@ namespace Tugas2FE.Controllers
         //menu detail unutk melihat coursenya di ambil oleh siapa saja
         public async Task<IActionResult> CourseStudentById(int id)
         {
-            var model =await _courseDAL.CourseWithStudent(id);
+            //mendapat TOKEN
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            var model =await _courseDAL.CourseWithStudent(id,myToken);
             return View(model);
         }
 
