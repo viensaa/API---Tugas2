@@ -52,6 +52,7 @@ namespace Tugas2FE.Controllers
         public async Task<ActionResult> Login(Account model)
         {
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
+            
             try
             {
                 var result = await _accountDAL.Authenticate(model);
@@ -61,11 +62,13 @@ namespace Tugas2FE.Controllers
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
                 {
                     HttpContext.Session.SetString("token", $"{token}");
+                    
 
                 }
 
                 // TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button>  {token}</div>";
-                ViewBag.user = result.Username;
+                TempData["user"] = $"{user}";
+
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

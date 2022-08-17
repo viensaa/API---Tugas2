@@ -27,6 +27,7 @@ namespace Tugas2FE.Controllers
                     $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                 return RedirectToAction("Login", "Account");
             }
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
             return View();
 
         }
