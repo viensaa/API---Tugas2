@@ -18,14 +18,14 @@ namespace Tugas2FE.Controllers
             return View();
         }
 
-        
+
         public IActionResult Register()
         {
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             return View();
         }
 
-        
+
         [HttpPost]
         public async Task<ActionResult> Register(Account model)
         {
@@ -43,7 +43,7 @@ namespace Tugas2FE.Controllers
 
         public IActionResult Login()
         {
-            
+
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             return View();
         }
@@ -61,7 +61,7 @@ namespace Tugas2FE.Controllers
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
                 {
                     HttpContext.Session.SetString("token", $"{token}");
-                    
+
                 }
 
                 // TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button>  {token}</div>";
@@ -73,6 +73,12 @@ namespace Tugas2FE.Controllers
 
                 return View();
             }
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("token");
+            return RedirectToAction("Login", "Account");
         }
 
     }
