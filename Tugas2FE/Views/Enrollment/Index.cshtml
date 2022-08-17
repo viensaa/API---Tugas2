@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Tugas2FE.ViewModels.EnrollmentDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_newLayout";
+}
+<h1>Daftar Enrollment Student</h1>
+<div>
+    @if (ViewData["pesan"] != null)
+    {
+        @Html.Raw(ViewData["pesan"])
+    }
+</div>
+<br />
+<table class="table table-striped" id="example">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Student FirstName
+            </th>
+            <th>
+                Student LastName
+            </th>
+            <th>
+                Title Course
+            </th>
+            <th>
+                Credits
+            </th>
+            <th>
+                Enrollment Date
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.enrollmentID)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.firstMidName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.credits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.enrollmentDate)
+            </td>
+            <td>
+               @*<a class="btn btn-warning btn-sm" asp-action="Update"
+                   asp-route-id="@item.enrollmentID">update</a> &nbsp; &nbsp; *@                  
+                    <a class="btn btn-danger btn-sm" asp-action="Delete"
+                   asp-route-id="@item.enrollmentID">Delete</a> &nbsp;
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+

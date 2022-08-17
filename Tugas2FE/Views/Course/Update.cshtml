@@ -1,0 +1,41 @@
+﻿@model Tugas2FE.ViewModels.Course
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "_newLayout";
+}
+
+
+
+<h4> Update Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="courseID" class="form-label"></label>
+                <input asp-for="courseID" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="courseID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="title" class="form-label"></label>
+                <input asp-for="title" class="form-control" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="credits" class="form-label"></label>
+                <input asp-for="credits" class="form-control" />
+                <span asp-validation-for="credits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

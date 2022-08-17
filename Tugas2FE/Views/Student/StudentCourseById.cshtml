@@ -1,0 +1,65 @@
+﻿@model Tugas2FE.ViewModels.StudentWithCourse
+
+@{
+    ViewData["Title"] = "StudentCourseById";
+    Layout = "_newLayout";
+}
+
+<h1>Details</h1>
+
+
+    
+    <hr />
+    <table class="table table-striped" id="example">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>          
+            <th>
+                FirstName
+            </th>
+              <th>
+                LastName
+            </th>
+            <th>
+                Enrollment Course
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.id)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(model => model.firstMidName)
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.lastName)
+                </td>
+                <td>
+                     @foreach(var enrollments in Model.enrollments)
+            {
+                    
+                         <p>
+                    @Html.DisplayFor(model => enrollments.title)
+                        </p>
+ 
+                }
+                </td>
+            </tr>
+        
+    </tbody>
+</table>   
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script> 

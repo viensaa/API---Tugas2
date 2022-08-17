@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Tugas2FE.ViewModels.Course>
+
+@{
+    ViewData["Title"] = "Course";
+     Layout = "_newLayout";
+}
+
+<h1>Daftar Course</h1>
+<div>
+    @if (ViewData["pesan"] != null)
+    {
+        @Html.Raw(ViewData["pesan"])
+    }
+</div>
+<br />
+<table class="table table-striped" id="example">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Credits
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.courseID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.credits)
+            </td>
+            <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Update"
+                   asp-route-id="@item.courseID">update</a> &nbsp; &nbsp;
+                    <a class="btn btn-primary btn-sm" asp-action="CourseStudentById"
+                   asp-route-id="@item.courseID">details</a> &nbsp;
+                    <a class="btn btn-danger btn-sm" asp-action="Delete"
+                   asp-route-id="@item.courseID">Delete</a> &nbsp;
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>

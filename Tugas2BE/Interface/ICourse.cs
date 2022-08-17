@@ -6,6 +6,7 @@ namespace Tugas2BE.Interface
     {
         Task<IEnumerable<Course>> ByTitle(string title);
         Task<IEnumerable<Course>> CourseByStudent();
+        Task<Course> CourseStudentById(int id);
 
     }
 }

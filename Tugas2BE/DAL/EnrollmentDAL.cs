@@ -23,7 +23,7 @@ namespace Tugas2BE.DAL
 
         public async Task<IEnumerable<Enrollment>> GetAll()
         {
-            var results = await _context.Enrollments.OrderBy(e => e.EnrollmentID).ToListAsync();
+            var results = await _context.Enrollments.Include(e=> e.Course).Include(c=>c.Student).OrderBy(e => e.EnrollmentID).ToListAsync();
             return results;
         }
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ using Tugas2BE.Models;
 
 namespace Tugas2BE.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EnrollmentController : ControllerBase
@@ -23,11 +25,25 @@ namespace Tugas2BE.Controllers
         }
         //get All
         [HttpGet]
-        public async Task<IEnumerable<EnrollmentDTO>> Get()
+        public async Task<IEnumerable<EnrollmentDetailDTO>> Get()
         {
             var results = await _enrollmentDAL.GetAll();
-            var readData = _mapper.Map<IEnumerable<EnrollmentDTO>>(results);
+            // var readData = _mapper.Map<IEnumerable<EnrollmentDetailDTO>>(results);
+            List<EnrollmentDetailDTO> readData = new List<EnrollmentDetailDTO>();
+           foreach (var item in results)
+            {
+                readData.Add(new EnrollmentDetailDTO
+                {
+                    EnrollmentID = item.EnrollmentID,
+                    FirstMidName = item.Student.FirstMidName,
+                    LastName = item.Student.LastName,
+                    Title = item.Course.Title,
+                    Credits = item.Course.Credits,
+                    EnrollmentDate = item.Student.EnrollmentDate
+                });                
+            }
             return readData;
+
         }
         //insert
         [HttpPost]

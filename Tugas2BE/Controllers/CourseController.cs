@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tugas2BE.DTO;
@@ -7,6 +8,7 @@ using Tugas2BE.Models;
 
 namespace Tugas2BE.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CourseController : ControllerBase
@@ -47,6 +49,7 @@ namespace Tugas2BE.Controllers
             var readData = _mapper.Map<IEnumerable<CourseDTO>>(results);
             return readData;
         }
+
         //CourseWith Student
         [HttpGet("WithStudent")]
         public async Task<IEnumerable<CourseWithStudentDTO>> CourseStudent()
@@ -119,6 +122,33 @@ namespace Tugas2BE.Controllers
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        //CourseWith Student By Id
+        [HttpGet("WithStudentByid/{id}")]
+        public async Task<CourseWithStudentDTO> CourseStudent(int id)
+        {
+            var result = await _courseDAL.CourseStudentById(id);
+            CourseWithStudentDTO readData = new CourseWithStudentDTO();
+            
+                List<StudentDTO> studentDTOs = new List<StudentDTO>();
+                foreach (var student in result.Enrollments)
+                {
+                    studentDTOs.Add(new StudentDTO
+                    {
+                        FirstMidName = student.Student.FirstMidName,
+                        LastName = student.Student.LastName,
+                    });
+                }
+                readData = new CourseWithStudentDTO
+                {
+                    CourseID = result.CourseID,
+                    Title = result.Title,
+                    Credits = result.Credits,
+                    Students = studentDTOs
+                };
+            
+            return readData;
         }
 
     }
