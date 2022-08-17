@@ -61,7 +61,7 @@ namespace Tugas2FE.Controllers
                 }
                 
                // TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button>  {token}</div>";
-                return RedirectToAction("Index", "Course");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {

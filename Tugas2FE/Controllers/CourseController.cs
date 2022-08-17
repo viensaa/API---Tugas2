@@ -22,6 +22,10 @@ namespace Tugas2FE.Controllers
                 myToken = HttpContext.Session.GetString("token");
 
             }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             IEnumerable<Course> models;
             models = await _courseDAL.GetAll(myToken);
@@ -48,6 +52,10 @@ namespace Tugas2FE.Controllers
                     myToken = HttpContext.Session.GetString("token");
 
                 }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
                 var result = await _courseDAL.Insert(course,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil menambahkan data Course Dengan Id {result.courseID}</div>";
                 return RedirectToAction("Index");
@@ -70,6 +78,10 @@ namespace Tugas2FE.Controllers
                 myToken = HttpContext.Session.GetString("token");
 
             }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var model = await _courseDAL.GetById(id,myToken);
             return View(model);
         }
@@ -86,6 +98,10 @@ namespace Tugas2FE.Controllers
                 {
                     myToken = HttpContext.Session.GetString("token");
 
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
                 }
                 var result = await _courseDAL.Update(course,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'>" +
@@ -109,6 +125,10 @@ namespace Tugas2FE.Controllers
                 myToken = HttpContext.Session.GetString("token");
 
             }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var model = await _courseDAL.GetById(id,myToken);
             return View(model);
         }
@@ -125,6 +145,10 @@ namespace Tugas2FE.Controllers
                 {
                     myToken = HttpContext.Session.GetString("token");
 
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
                 }
                 await _courseDAL.Delete(id,myToken);
                 TempData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Berhasil Menghapus Data</div>";
@@ -145,6 +169,10 @@ namespace Tugas2FE.Controllers
             {
                 myToken = HttpContext.Session.GetString("token");
 
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
             }
             var model =await _courseDAL.CourseWithStudent(id,myToken);
             return View(model);

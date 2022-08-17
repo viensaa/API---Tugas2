@@ -15,7 +15,18 @@ namespace Tugas2FE.Controllers
 
         public IActionResult Index()
         {
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
+
         }
 
         public IActionResult Privacy()
