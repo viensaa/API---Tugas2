@@ -24,6 +24,8 @@ namespace Tugas2FE.Controllers
             }
             else
             {
+                TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                 return RedirectToAction("Login" , "Account");
                 }
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
@@ -52,6 +54,8 @@ namespace Tugas2FE.Controllers
                 }
                 else
                 {
+                    TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                     return RedirectToAction("Login", "Account");
                 }
                 var result = await _studentDAL.Insert(student,myToken);
@@ -77,6 +81,8 @@ namespace Tugas2FE.Controllers
             }
             else
             {
+                TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                 return RedirectToAction("Login", "Account");
             }
             var model = await _studentDAL.GetById(id,myToken);
@@ -97,6 +103,8 @@ namespace Tugas2FE.Controllers
                 }
                 else
                 {
+                    TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                     return RedirectToAction("Login", "Account");
                 }
                 var result = await _studentDAL.Update(student,myToken);
@@ -122,6 +130,8 @@ namespace Tugas2FE.Controllers
             }
             else
             {
+                TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                 return RedirectToAction("Login", "Account");
             }
             var model = await _studentDAL.GetById(id,myToken);
@@ -143,6 +153,8 @@ namespace Tugas2FE.Controllers
                 }
                 else
                 {
+                    TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                     return RedirectToAction("Login", "Account");
                 }
 
@@ -167,6 +179,8 @@ namespace Tugas2FE.Controllers
             }
             else
             {
+                TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                 return RedirectToAction("Login", "Account");
             }
             var result = await _studentDAL.StudentCourseById(id,myToken);

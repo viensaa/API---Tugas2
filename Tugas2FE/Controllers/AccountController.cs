@@ -50,6 +50,7 @@ namespace Tugas2FE.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(Account model)
         {
+            ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             try
             {
                 var result = await _accountDAL.Authenticate(model);

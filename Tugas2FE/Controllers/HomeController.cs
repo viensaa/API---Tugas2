@@ -23,6 +23,8 @@ namespace Tugas2FE.Controllers
             }
             else
             {
+                TempData["pesan"] = $"<div class='alert alert-danger alert-dismissible fade show'>" +
+                    $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> Session Habis Harap Login Kembali</div>";
                 return RedirectToAction("Login", "Account");
             }
             return View();
