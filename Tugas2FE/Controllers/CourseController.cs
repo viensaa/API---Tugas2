@@ -29,6 +29,8 @@ namespace Tugas2FE.Controllers
                 return RedirectToAction("Login", "Account");
             }
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             IEnumerable<Course> models;
             models = await _courseDAL.GetAll(myToken);
             return View(models);
@@ -37,7 +39,8 @@ namespace Tugas2FE.Controllers
         //insert data        
         public IActionResult Create()
         {
-
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             return View();
         }
 
@@ -75,6 +78,8 @@ namespace Tugas2FE.Controllers
         //update
         public async Task<IActionResult> Update(int id)
         {
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -126,6 +131,8 @@ namespace Tugas2FE.Controllers
         //delete
         public async Task<IActionResult> Delete(int id)
         {
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -175,6 +182,8 @@ namespace Tugas2FE.Controllers
         //menu detail unutk melihat coursenya di ambil oleh siapa saja
         public async Task<IActionResult> CourseStudentById(int id)
         {
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))

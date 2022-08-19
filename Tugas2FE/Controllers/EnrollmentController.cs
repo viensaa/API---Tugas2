@@ -20,6 +20,8 @@ namespace Tugas2FE.Controllers
         //getdALL
         public async Task<IActionResult> Index()
         {
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -44,6 +46,8 @@ namespace Tugas2FE.Controllers
         //insert data        
         public async Task<IActionResult> Create()
         {
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
 
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -95,6 +99,10 @@ namespace Tugas2FE.Controllers
         //update
         public async Task<IActionResult> Update(int id)
         {
+            //mengambil data
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            //mengirim data
+            TempData["user"] = ViewData["user"];
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
             {
@@ -143,6 +151,8 @@ namespace Tugas2FE.Controllers
         //delete
         public async Task<IActionResult> Delete(int id)
         {
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
             {

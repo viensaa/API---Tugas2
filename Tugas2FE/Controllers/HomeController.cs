@@ -28,6 +28,7 @@ namespace Tugas2FE.Controllers
                 return RedirectToAction("Login", "Account");
             }
             ViewData["user"] = TempData["user"] ?? TempData["user"];
+            TempData["user"] = ViewData["user"];
             return View();
 
         }

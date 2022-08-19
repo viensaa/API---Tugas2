@@ -15,6 +15,10 @@ namespace Tugas2FE.Controllers
 
         public async  Task<IActionResult> Index()
         {
+            //mengambil data
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            //mengirim data
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -37,7 +41,10 @@ namespace Tugas2FE.Controllers
         //insert data        
         public IActionResult Create()
         {
-
+            //mengambil data
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            //mengirim data
+            TempData["user"] = ViewData["user"];
             return View();
         }
         [HttpPost]
@@ -72,6 +79,10 @@ namespace Tugas2FE.Controllers
         //update
         public async Task<IActionResult>Update(int id)
         {
+            //mengambil data
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            //mengirim data
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -121,6 +132,10 @@ namespace Tugas2FE.Controllers
         //delete
         public async Task<IActionResult> Delete(int id)
         {
+            //mengambil data
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            //mengirim data
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
@@ -170,6 +185,10 @@ namespace Tugas2FE.Controllers
 
         public async Task<IActionResult> StudentCourseById(int id)
         {
+            //mengambil data
+            ViewData["user"] = TempData["user"] ?? TempData["user"];
+            //mengirim data
+            TempData["user"] = ViewData["user"];
             //mendapat TOKEN
             string myToken = string.Empty;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
