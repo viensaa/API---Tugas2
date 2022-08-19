@@ -73,7 +73,7 @@ namespace Tugas2FE.Controllers
             }
             catch (Exception ex)
             {
-
+                ViewData["pesan"] = $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> Error: {ex.Message}</div>";
                 return View();
             }
         }
